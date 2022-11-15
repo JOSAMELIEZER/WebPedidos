@@ -5,6 +5,9 @@ import PagInicio from '@/components/PagInicio.vue'
 import GestPedido from '@/components/GestPedido.vue'
 import MenuPlato from '@/components/MenuPlato.vue'
 import MiPedido from '@/components/MiPedido.vue'
+import BienvenidoUsuario from '@/components/BienvenidoUsuario.vue'
+import GestUsuario from '@/components/GestUsuario.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -31,15 +34,22 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
     path: '/registrocompleto',
     name: 'registrocompleto',
     component: () => import ('../views/RegistroCompleto.vue')
+  },
+  {
+    path: '/usr',
+    name: 'bienvenidoUsr',
+    component: BienvenidoUsuario
+  },
+  {
+    path: '/usr/gestion',
+    name: 'gestusuario',
+    component: GestUsuario
   }
 ]
 
