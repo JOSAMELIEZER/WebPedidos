@@ -15,7 +15,7 @@
                         </b-form-input>
                     </b-form-group>
                     <b-form-group id="input-group-2" label="Contraseña:" label-for="input-2" class="m-3">
-                        <b-form-input id="input-2" type="passsword" v-model="form.clave"
+                        <b-form-input id="input-2" type="password" v-model="form.clave"
                             placeholder="Ingrese contraseña" required>
                         </b-form-input>
                     </b-form-group>
@@ -42,8 +42,8 @@ export default {
         verificar() {
             this.axios.post('/usr/login', this.form)
                 .then(r => {
-                    this.axios.defaults.headers.common.authorization = r.data.token;
-                    localStorage.setItem('token',r.data.token);
+                    this.axios.defaults.headers.common.authorization = "Bearer."+r.data.token;
+                    localStorage.setItem('token',"Bearer."+r.data.token);
                     this.$store.commit('setid',r.data.userdata.id)
                     this.$store.commit('setusuario',r.data.userdata.usuario)
                     this.$store.commit('setnombre',r.data.userdata.nombre)

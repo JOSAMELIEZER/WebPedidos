@@ -6,6 +6,9 @@ import GestPedido from '@/components/GestPedido.vue'
 import MenuPlato from '@/components/MenuPlato.vue'
 import MiPedido from '@/components/MiPedido.vue'
 import BienvenidoUsuario from '@/components/BienvenidoUsuario.vue'
+import CrearPlato from '@/components/CrearPlato.vue'
+import CatalogoPlato from '@/components/CatalogoPlato.vue'
+import EditPlato from '@/components/EditPlato.vue'
 import GestUsuario from '@/components/GestUsuario.vue'
 
 Vue.use(VueRouter)
@@ -17,6 +20,16 @@ const routes = [
     component: GestPedido
   },
   {
+    path: '/crear',
+    name: 'crearplato',
+    component: CrearPlato
+  },
+  {
+    path: '/editar',
+    name: 'editarplato',
+    component: EditPlato
+  },
+  {
     path: '/menuplato',
     name: 'menuplato',
     component: MenuPlato
@@ -25,6 +38,11 @@ const routes = [
     path: '/mipedido',
     name: 'mipedido',
     component: MiPedido
+  },
+  {
+    path: '/catalogo',
+    name: 'catalogo',
+    component: CatalogoPlato
   },
   {
     path: '/',
@@ -40,6 +58,11 @@ const routes = [
     path: '/registrocompleto',
     name: 'registrocompleto',
     component: () => import ('../views/RegistroCompleto.vue')
+  },
+  {
+    path: '/registroedit',
+    name: 'registroedit',
+    component: () => import ('../views/RegEdit.vue')
   },
   {
     path: '/usr',

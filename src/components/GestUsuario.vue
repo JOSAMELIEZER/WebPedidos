@@ -35,7 +35,7 @@
                         required
                         ></b-form-input>
                     </b-form-group>
-                    <b-form-group id="input-group-3" label="Contraseña" label-for="input-3">
+                    <b-form-group id="input-group-3" label="Correo Electronico" label-for="input-3">
                         <b-form-input 
                         id="input-3"
                         v-model="form.email"
@@ -113,6 +113,7 @@ export default {
 
         },
         nuevo() {
+            this.accion==0;
             this.$root.$emit('bv::show::modal', 'modal-1', '#btnShow');
         },
         cerrar(){
@@ -141,6 +142,9 @@ export default {
                 console.log(r.data.data);
                 this.usuarios = r.data.data
             })
+    },
+    beforeMount(){
+        if(this.$store.state.rol_usuario=='client') this.$router.push('/');
     }
 }
 </script>
