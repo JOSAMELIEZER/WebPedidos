@@ -35,6 +35,7 @@
                 <template #cell(actions)="row">
                     <b-button v-if="row.item.estado =='pendiente'" variant="primary" size="sm" @click="aceptar(row.item)" class="mr-1">Aceptar</b-button>
                     <b-button v-if="row.item.estado =='pendiente'" variant="danger" size="sm" @click="rechazar(row.item)" class="mr-1">Rechazar</b-button>
+                    <b-button v-if="row.item.estado =='rechazado'" variant="danger" size="sm" @click="borrar(row.item)" class="mr-1">Limpiar</b-button>
                 </template>
             </b-table>
         </div>
@@ -74,6 +75,11 @@ export default {
             this.cargar();
 
         },
+        async borrar(item) {     
+           await this.axios.post('/pedido/borrar',item);
+           this.cargar();
+
+       },
         cerrar(){
              this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
         },

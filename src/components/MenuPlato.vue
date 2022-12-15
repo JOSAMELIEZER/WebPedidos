@@ -6,9 +6,8 @@
         </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div v-for="product in platos" :key="product.id" class="">
-                <b-card img-src="" img-alt="Vue logo" img-top style="max-width: 20rem;" class="col">
-
-                    <img alt="" src="">
+                <b-card title="" :img-src="getimg(product)" img-alt="Image" img-top
+                    tag="article" style="max-width: 20rem;" class="mb-2">
 
                     <b-card-title>{{ product.nom_plato }}</b-card-title>
                     <b-card-sub-title class="mb-2">{{ product.precio }} BS</b-card-sub-title>
@@ -79,17 +78,11 @@ export default {
         }
         
     },
-    mounted() {
-
-        this.cargar();
-
-        this.axios.get('/plato/mostrar')
-            .then(r => {
-                console.log(r.data.data);
-                this.platos = r.data.data
-            })
-    },
     methods: {
+        getimg(item){
+            return require('@/assets/'+item.foto)
+        },
+
         crear() {
             this.$router.push('/crear')
         },
@@ -112,7 +105,8 @@ export default {
             this.$root.$emit('bv::show::modal', 'modal-1', '#btnShow');
         },
         cerrar() {
-            this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
+            this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow');
+            this.cargar();
         },
         async guardar(){
             if(this.accion==0)
@@ -174,7 +168,16 @@ export default {
 
         }
 
-    }
+    },
+    mounted() {
+        this.cargar();
+
+        this.axios.get('/plato/mostrar')
+            .then(r => {
+                console.log(r.data.data);
+                this.usuarios = r.data.data
+            })
+    },
 }
 </script>
 <style>

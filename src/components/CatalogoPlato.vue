@@ -1,26 +1,25 @@
 <template>
     <div class="container">
-        <h1>Menu</h1>
+        <h1>NUESTRO MENU DEL DIA</h1>
+        <b-alert v-if="$store.state.rol_usuario == ''" show>INICIA SESION PARA PODER REAIZAR TU PEDIDO</b-alert>
+
+        <b-alert v-model="showDismissibleAlert" variant="success" dismissible>
+            Se añadio a Mi PEDIDO!
+        </b-alert>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div v-for="product in platos" :key="product.id" class="">
-                <b-card title="Card Title"
-                        :img-src="getimg(product)"
-                        img-alt="Image"
-                        img-top
-                        tag="article"   
-                        style="height: 50px;"
-                        class="mb-2">
-                    <div style="width=100%; height=225">
-                        <img class="card-img-top" alt="logo" :src="getimg(product)" >
-                    </div>
-                    
+                <b-card title="" :img-src="getimg(product)" img-alt="Image" img-top tag="article"
+                    style="max-width: 20rem;" class="mb-2">
+                    <!-- <b-card title="" :img-src="getimg(product)" img-alt="Image" img-top tag="article"
+                        style="height: 50px;" class="mb-2"> -->
                     <b-card-title>{{ product.nom_plato }}</b-card-title>
                     <b-card-sub-title class="mb-2">{{ product.precio }} BS</b-card-sub-title>
                     <b-card-text>
                         {{ product.desc_plato }}
                     </b-card-text>
-                    <b-button variant="primary" size="sm" @click="nuevo(product)" class="mr-1">Añadir</b-button>
-                </b-card>    
+                    <b-button v-if="$store.state.rol_usuario == 'client'" variant="primary" size="sm"
+                        @click="nuevo(product),showDismissibleAlert = true" class="mr-1">Añadir</b-button>
+                </b-card>
             </div>
         </div>
     </div>
@@ -39,7 +38,8 @@ export default {
             },
             file: null,
             tipo: [{ text: "refresco", value: null }, "comida"],
-            tipo2: [{ text: "refresco", value: null }, "comida"]
+            tipo2: [{ text: "refresco", value: null }, "comida"],
+            showDismissibleAlert: false
         }
     },
     mounted() {
@@ -53,29 +53,30 @@ export default {
             })
     },
     methods: {
-        getimg(item){
-            return require('@/assets/'+item.foto)
+        getimg(item) {
+            return require('@/assets/' + item.foto)
         },
 
-        async nuevo(item) {          
-            
-            console.log(this.$store.state.id);
-            item.user_id=this.$store.state.id;
+        async nuevo(item) {
+            item.total = item.precio
+            item.user_id = this.$store.state.id;
             console.log(item);
-            await this.axios.post('/pedido/agregar',item)
-        },
-        modificar(item) {
-                this.form=item;
-                this.$router.push('/editar',item)
-            // this.form=item;
-        },async borrar(item) {
-            console.log(item);
-            await this.axios.post('/plato/borrar',item);
+            await this.axios.post('/pedido/agregar', item);
             this.cargar();
 
-        },async cargar(){
+        },
+        modificar(item) {
+            this.form = item;
+            this.$router.push('/editar', item)
+            // this.form=item;
+        }, async borrar(item) {
+            console.log(item);
+            await this.axios.post('/plato/borrar', item);
+            this.cargar();
+
+        }, async cargar() {
             await this.axios.get('/plato/mostrar')
-            .then(r=>{this.platos = r.data.data;})
+                .then(r => { this.platos = r.data.data; })
             console.log();
         },
 
@@ -109,6 +110,5 @@ export default {
 }
 </script>
 <style>
-
 
 </style>
