@@ -6,6 +6,16 @@
         {{nota.total}}
 
       </div>
+
+      <div>
+            <b-table striped hover :items="nota" :fields="campos" stacked="md" show-empty small>
+                <template #cell(actions)="row">
+                    <b-button v-if="row.item.estado =='pendiente'" variant="primary" size="sm"  class="mr-1">Aceptar</b-button>
+                    <b-button v-if="row.item.estado =='pendiente'" variant="danger" size="sm"  class="mr-1">Rechazar</b-button>
+                    <b-button v-if="row.item.estado =='rechazado'" variant="danger" size="sm" class="mr-1">Limpiar</b-button>
+                </template>
+            </b-table>
+        </div>
     </div>
 </template>
 <script>
@@ -19,14 +29,15 @@ export default{
         nota: [
           ],
           campos: [
-                { key: "id", lavel: "id" },
-                { key: "user_id", lavel: "user_id" },
-                { key: "nom_plato", lavel: "Plato" },
-                { key: "cantidad", lavel: "Cantidad" },
-                { key: "fecha_pedido", lavel: "pedido" },
-                { key: "fecha_envio", lavel: "enviado" },
-                { key: "estado", lavel: "estado" },
-                { key: "actions", lavel: "Opciones" }
+                { key: "id", label: "id" },
+                { key: "nombre", label: "Nombre" },
+                { key: "nom_plato", label: "Plato" },
+                { key: "cantidad", label: "Cantidad" },
+                { key: "total", label: "Total" },
+                { key: "fecha_pedido", label: "pedido" },
+                { key: "fecha_envio", label: "enviado" },
+                { key: "estado", label: "estado" },
+                { key: "actions", label: "Opciones" }
             ],
             form:{
                 cantidad:0,

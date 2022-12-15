@@ -25,6 +25,11 @@ const routes = [
     component: CrearPlato
   },
   {
+    path: '/contactanos',
+    name: 'contactanos',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ContacTanos.vue')
+  },
+  {
     path: '/register',
     name: 'registrar',
     component: RegistrarUsr

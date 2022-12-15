@@ -5,6 +5,7 @@
             <b-nav-item to="/" exact exact-active-class="active">Iniciar Sesion</b-nav-item>
             <b-nav-item to="/register" exact exact-active-class="active">Registrarse</b-nav-item>
             <b-nav-item to="/catalogo" exact exact-active-class="active">Menu</b-nav-item>
+            <b-nav-item to="/contactanos" exact exact-active-class="active">Contactanos</b-nav-item>
             <!-- <b-nav-item to="/menuplato" exact exact-active-class="active">Menu Plato</b-nav-item>
             <b-nav-item to="/mipedido" exact exact-active-class="active">Mi Pedido</b-nav-item>
             <b-nav-item >Salir</b-nav-item> -->

@@ -36,7 +36,10 @@
                 <b-button size="sm" variant="success" @click="guardar()">Guardar</b-button>
             </template>
         </b-modal>
-
+        <!-- <label for="">
+            <input type="text" class="form-control" v-model="filterField">
+        </label>
+        v-if="filter(person)" v-for="person in people" -->
         <div>
             <b-table striped hover :items="pedido" :fields="campos" stacked="md" show-empty small>
                 
@@ -77,10 +80,16 @@ export default {
                 fecha_envio:"",
             },
             showDismissibleAlert: false,
-            showDismissibleAlert2: false
+            showDismissibleAlert2: false,
+            filterField: ''
       }
     },
     methods: {
+        // filter(person){
+        //     return person.name,toLocaleLowerCase().indexOf(this.filterField.toLocaleLowerCase)
+        // },
+
+
         modificar(item) {
             this.form=item;
             this.accion=1;
